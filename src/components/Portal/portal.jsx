@@ -1,70 +1,36 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import { BufferAttribute, Color, AdditiveBlending, DynamicDrawUsage } from "three";
-import './portal.scss'
+import { BufferAttribute, Color, AdditiveBlending, DoubleSide } from "three";
+import { plasmaVertexShader, plasmaFragmentShader } from "./plasmaShader.js";
 import { useRef, useMemo } from "react";
-import { attribute } from "three/tsl";
+import './portal.scss'
+
 
 function PortalRing({ radius, color, speed, positionZ }) {
-    const ringRef = useRef()
-    const particlesRef = useRef()
-        const count = 700
-        const {positions, basePositions, phases, amplitudes} = useMemo(() => {
-        const positions = new Float32Array(count * 3)
-        const basePositions = new Float32Array(count * 3)
-        const phases = new Float32Array(count)
-        const amplitudes = new Float32Array(count)
-        for(let i = 0; i < count; i++) {
-            const angle = Math.random() * Math.PI * 2
-            const variation = (Math.random() + Math.random() + Math.random() - 1.5) * 0.16
-            const particlesRadius = radius + variation
-            const x = Math.cos(angle) * particlesRadius
-            const y = Math.sin(angle) * particlesRadius
-            const z = (Math.random() - 0.5) * 0.18
-            const index = i * 3
-            positions[index] = x
-            positions[index + 1] = y
-            positions[index + 2] = z
-            basePositions[index] = x
-            basePositions[index + 1] = y
-            basePositions[index + 2] = z
-            phases[i] = Math.random() * Math.PI * 2
-            amplitudes[i] = 0.003 + Math.random() * 0.018
-        }
-        return {positions, basePositions, phases, amplitudes}
-    }, [radius])
+    const materialRef = useRef()
+    const uniforms = useMemo(() => ({
+        uTime: {value: 0},
+        uColor: {value: new Color(color)} 
+    }), [color])
     useFrame((state, delta) => {
-        if(ringRef.current) {
-        ringRef.current.rotation.z += delta * speed
-        }
-        if(particlesRef.current) {
-            particlesRef.current.rotation.z -= delta * speed
-            const material = particlesRef.current.material
-            material.opacity = 0.65 + Math.sin(state.clock.elapsedTime * 3 + positionZ) * 0.15
-        }
+        if(!materialRef.current) return
+        materialRef.current.uniforms.uTime.value += delta
     })
     return (
-        <group position={[0, 0, positionZ]}>
-            <mesh ref={ringRef}>
-                <torusGeometry args={[radius, 0.06, 8, 128]}/>
-                <meshBasicMaterial color={new Color(color).multiplyScalar(1.2)} transparent opacity={0.65} toneMapped={false}/>
-            </mesh>
-            <points ref={particlesRef}>
-                <bufferGeometry>
-                    <bufferAttribute attach="attributes-position" args={[positions, 3]} onUpdate={(attribute) => {attribute.setUsage(DynamicDrawUsage)}}/>
-                </bufferGeometry>
-                <pointsMaterial
-                    color={color}
-                    size={0.018}
-                    sizeAttenuation
-                    transparent
-                    opacity={0.85}
-                    depthWrite={false}
-                    blending={AdditiveBlending}
-                    toneMapped={false}        
-                />
-            </points>
-        </group>
+        <mesh position={[0, 0, positionZ]} scale={radius / 1.5}>
+            <ringGeometry args={[1.28, 1.72, 256, 16]}/>
+            <shaderMaterial
+                ref={materialRef}
+                uniforms={uniforms}
+                vertexShader={plasmaVertexShader}
+                fragmentShader={plasmaFragmentShader}
+                transparent
+                side={DoubleSide}
+                blending={AdditiveBlending}
+                depthWrite={false}
+                toneMapped={false}
+            />
+        </mesh>
     )
 }
 
