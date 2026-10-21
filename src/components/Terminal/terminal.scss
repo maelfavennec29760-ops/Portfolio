@@ -1,0 +1,425 @@
+
+$primary: #a855f7;
+$secondary: #7c3aed;
+$text: #e9d5ff;
+$background: #000000;
+$success: #86efac;
+
+.terminal {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  background: $background;
+  color: $text;
+
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+
+  overflow: hidden;
+
+  // En-tête du terminal
+  &-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    height: 55px;
+    padding: 0 25px;
+    flex-shrink: 0;
+
+    border-bottom: 1px solid rgba($primary, 0.2);
+
+    span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+
+      background: $primary;
+      box-shadow: 0 0 8px rgba($primary, 0.5);
+
+      &:nth-child(2) {
+        opacity: 0.6;
+      }
+
+      &:nth-child(3) {
+        opacity: 0.3;
+      }
+    }
+  }
+
+  // Contenu principal
+  &-content {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    padding: 35px 45px;
+
+    p {
+      margin: 0 0 16px;
+      line-height: 1.6;
+    }
+  }
+
+  // Curseur clignotant
+  &-cursor {
+    display: inline-block;
+    color: $primary;
+
+    animation: terminalBlink 0.8s steps(1) infinite;
+  }
+
+  // Messages du système
+  &-lines,
+  &-authentication {
+    p {
+      animation: terminalFadeIn 0.25s ease-out both;
+    }
+  }
+
+  // Écran de connexion
+  &-login {
+    width: 100%;
+    animation: terminalFadeIn 0.4s ease-out;
+
+    > p:first-child {
+      color: $primary;
+      font-weight: bold;
+    }
+  }
+
+  // Formulaire
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    width: 100%;
+    max-width: 440px;
+    margin: 30px auto 0;
+
+    button {
+      align-self: center;
+
+      margin-top: 15px;
+      padding: 14px 30px;
+      min-height: 48px;
+
+      border: 1px solid $primary;
+      border-radius: 5px;
+
+      background: rgba($primary, 0.1);
+      color: $text;
+
+      font-family: inherit;
+      font-size: 17px;
+
+      cursor: default;
+
+      box-shadow: 0 0 12px rgba($primary, 0.15);
+
+      transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+
+      &:focus-visible {
+        outline: 2px solid #c084fc;
+        outline-offset: 4px;
+      }
+    }
+  }
+
+  // Champs de connexion
+  &-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    label {
+      font-size: 16px;
+      color: rgba($text, 0.8);
+    }
+
+    input {
+      width: 100%;
+      height: 48px;
+      box-sizing: border-box;
+
+      padding: 0 16px;
+
+      border: 1px solid rgba($primary, 0.6);
+      border-radius: 4px;
+
+      background: rgba($primary, 0.04);
+      color: $text;
+
+      font-family: inherit;
+      font-size: 17px;
+
+      outline: none;
+      caret-color: transparent;
+
+      box-shadow: inset 0 0 8px rgba($primary, 0.05);
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+      &:focus-visible {
+        border-color: $primary;
+        box-shadow: 0 0 10px rgba($primary, 0.2);
+      }
+    }
+  }
+
+  // Authentification
+  &-authentication {
+    p:first-child {
+      color: $primary;
+      margin-bottom: 24px;
+    }
+
+    p:last-child {
+      color: $success;
+    }
+  }
+
+  // Chargement
+  &-loading {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+
+    animation: terminalFadeIn 0.4s ease-out;
+
+    > span {
+      display: block;
+      margin-top: 14px;
+
+      text-align: right;
+      font-size: 16px;
+      color: $primary;
+    }
+
+    > p:last-child {
+      margin-top: 24px;
+    }
+  }
+
+  // Message de réussite
+  &-success {
+    color: $success;
+    font-weight: bold;
+  }
+
+  // Barre de progression
+  &-progress {
+    width: 100%;
+    height: 11px;
+
+    margin-top: 30px;
+
+    border: 1px solid rgba($primary, 0.7);
+    border-radius: 4px;
+
+    background: rgba($primary, 0.08);
+    overflow: hidden;
+
+    box-shadow: 0 0 8px rgba($primary, 0.15);
+  }
+
+  &-progress-bar {
+    height: 100%;
+
+    background: linear-gradient(
+      90deg,
+      $secondary,
+      $primary
+    );
+
+    box-shadow: 0 0 12px rgba($primary, 0.8);
+
+    transition: width 0.04s linear;
+  }
+}
+
+// Animation du curseur
+@keyframes terminalBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+// Apparition des éléments
+@keyframes terminalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Bouton activé pendant l'authentification
+.terminal-button-active {
+  background: rgba($primary, 0.35) !important;
+  border-color: #c084fc !important;
+  color: #fff !important;
+
+  box-shadow:
+    0 0 12px rgba($primary, 0.8),
+    0 0 25px rgba($primary, 0.45),
+    inset 0 0 12px rgba($primary, 0.25) !important;
+
+  animation: terminalButtonPulse 0.85s ease-in-out;
+}
+
+@keyframes terminalButtonPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  35% {
+    transform: scale(1.04);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Tablettes et petits ordinateurs
+@media (max-width: 900px) {
+  .terminal {
+    font-size: 16px;
+
+    &-content {
+      padding: 28px 30px;
+    }
+
+    &-form {
+      max-width: 400px;
+    }
+
+    &-field {
+      label {
+        font-size: 15px;
+      }
+
+      input {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// Smartphones
+@media (max-width: 600px) {
+  .terminal {
+    min-height: 400px;
+    font-size: 13px;
+
+    &-header {
+      height: 42px;
+      padding: 0 15px;
+      gap: 8px;
+
+      span {
+        width: 9px;
+        height: 9px;
+      }
+    }
+
+    &-content {
+      padding: 20px;
+    }
+
+    &-content p {
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    &-form {
+      max-width: 100%;
+      margin-top: 20px;
+      gap: 12px;
+
+      button {
+        margin-top: 10px;
+        padding: 12px 20px;
+        min-height: 44px;
+        font-size: 14px;
+      }
+    }
+
+    &-field {
+      gap: 7px;
+
+      label {
+        font-size: 13px;
+      }
+
+      input {
+        height: 42px;
+        padding: 0 12px;
+        font-size: 14px;
+      }
+    }
+
+    &-authentication {
+      p:first-child {
+        margin-bottom: 16px;
+      }
+    }
+
+    &-loading {
+      max-width: 100%;
+
+      > span {
+        font-size: 13px;
+      }
+    }
+
+    &-progress {
+      height: 8px;
+      margin-top: 20px;
+    }
+  }
+}
+
+// Accessibilité : réduction des animations
+@media (prefers-reduced-motion: reduce) {
+  .terminal {
+    &-cursor,
+    &-login,
+    &-loading,
+    &-lines p,
+    &-authentication p {
+      animation: none;
+    }
+
+    &-progress-bar {
+      transition: none;
+    }
+  }
+
+  .terminal-button-active {
+    animation: none;
+  }
+}

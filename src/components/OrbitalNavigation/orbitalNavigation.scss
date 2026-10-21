@@ -1,0 +1,237 @@
+
+$primary: #a855f7;
+$secondary: #7c3aed;
+$background: #05030a;
+
+.orbital-navigation {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  padding: 40px 20px;
+
+  background:
+  linear-gradient(
+    rgba(5, 3, 10, 0.12),
+    rgba(5, 3, 10, 0.12)
+  ),
+  url('../../assets/background/background.webp');
+
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+  &-system {
+  position: relative;
+
+  width: 800px;
+  height: 700px;
+
+  flex-shrink: 0;
+
+  transform: scale(1.12);
+  transform-origin: center;
+}
+  // Conteneur du système orbital
+  &-system {
+    position: relative;
+
+    width: 800px;
+    height: 700px;
+
+    flex-shrink: 0;
+  }
+
+  // Cercle orbital décoratif
+  &-orbit {
+    position: absolute;
+
+    width: 540px;
+    height: 540px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border: 1px solid rgba($primary, 0.3);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 15px rgba($primary, 0.12),
+      inset 0 0 15px rgba($primary, 0.06);
+
+    pointer-events: none;
+  }
+
+  // Hero au centre du cercle
+  &-hero {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 360px;
+    max-width: 100%;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1;
+  }
+
+  // Conteneurs des planètes
+  &-item {
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 2;
+
+    // À propos : en haut
+    &--about {
+      top: 11%;
+      left: 50%;
+    }
+
+    // Compétences : en haut à droite
+    &--skills {
+      top: 34%;
+      left: 88%;
+    }
+
+    // Projets : en bas à droite
+    &--projects {
+      top: 82%;
+      left: 73%;
+    }
+
+    // Parcours : en bas à gauche
+    &--journey {
+      top: 82%;
+      left: 27%;
+    }
+
+    // Contact : en haut à gauche
+    &--contact {
+      top: 34%;
+      left: 12%;
+    }
+  }
+}
+
+// Écrans intermédiaires
+@media (max-width: 1100px) and (min-width: 701px) {
+  .orbital-navigation {
+    &-system {
+      transform: scale(0.82);
+    }
+  }
+}
+
+// Tablettes et petits écrans
+@media (max-width: 700px) {
+  .orbital-navigation {
+    padding: 50px 20px;
+
+    overflow: visible;
+
+    &-system {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      align-items: center;
+      justify-items: center;
+
+      column-gap: 20px;
+      row-gap: 30px;
+
+      transform: none;
+    }
+
+    // On retire l'orbite circulaire sur mobile
+    &-orbit {
+      display: none;
+    }
+
+    // Le Hero passe au-dessus des planètes
+    &-hero {
+      position: static;
+
+      width: 100%;
+      max-width: 420px;
+
+      transform: none;
+
+      grid-column: 1 / -1;
+
+      margin-bottom: 35px;
+    }
+
+    // Les planètes suivent la grille
+    &-item {
+      position: static;
+      transform: none;
+
+      &--contact {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+}
+
+// Smartphones
+@media (max-width: 480px) {
+  .orbital-navigation {
+    padding: 40px 15px;
+
+    &-system {
+      column-gap: 10px;
+      row-gap: 25px;
+    }
+
+    &-hero {
+      margin-bottom: 25px;
+    }
+  }
+}
+
+// Très petits écrans
+@media (max-width: 360px) {
+  .orbital-navigation {
+    padding: 30px 10px;
+
+    &-system {
+      column-gap: 5px;
+      row-gap: 20px;
+    }
+  }
+}
+@keyframes stars-twinkle {
+  from {
+    opacity: 0.25;
+  }
+
+  to {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbital-navigation-stars {
+    animation: none;
+  }
+}

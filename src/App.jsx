@@ -1,8 +1,14 @@
-import Portal from './components/Portal/portal.jsx'
+import { Routes, Route } from 'react-router-dom'
+
+import Portal from './components/Portal/portal'
+import OrbitalNavigation from './components/OrbitalNavigation/orbitalNavigation.jsx'
 
 function App() {
   return (
-        <Portal />
+    <Routes>
+      <Route path="/" element={<Portal />} />
+      <Route path="/portfolio" element={<OrbitalNavigation />} />
+    </Routes>
   )
 }
 
