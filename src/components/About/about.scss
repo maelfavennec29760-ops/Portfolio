@@ -1,0 +1,439 @@
+
+$primary: #a855f7;
+$background: #05030a;
+$text: #f5f3ff;
+$muted: #a1a1b5;
+
+.about {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  background: $background;
+  color: $text;
+  font-family: 'Inter', Arial, sans-serif;
+
+  // Conteneur principal
+  &-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: 1500px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 20px 35px 25px;
+    box-sizing: border-box;
+
+    border: 1px solid rgba($primary, 0.4);
+    border-radius: 16px;
+
+    background:
+      radial-gradient(
+        ellipse at 100% 0%,
+        rgba($primary, 0.08),
+        transparent 45%
+      ),
+      rgba(5, 3, 10, 0.95);
+
+    box-shadow: 0 0 30px rgba($primary, 0.06);
+  }
+
+  // Bouton retour
+  &-back {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    flex-shrink: 0;
+    gap: 12px;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: $muted;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+
+    transition: color 0.25s ease;
+
+    &:hover {
+      color: #fff;
+    }
+
+    &-icon {
+      width: 48px;
+      height: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid rgba($primary, 0.6);
+      border-radius: 10px;
+
+      color: #d8b4fe;
+      background: rgba($primary, 0.06);
+
+      transition:
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    &:hover &-icon {
+      background: rgba($primary, 0.15);
+      box-shadow: 0 0 15px rgba($primary, 0.2);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $primary;
+      outline-offset: 5px;
+      border-radius: 10px;
+    }
+  }
+
+  // Présentation principale
+  &-introduction {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 20px 25px;
+
+    border-bottom: 1px solid rgba($primary, 0.2);
+  }
+
+  &-content {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+    min-width: 0;
+  }
+
+  // Petit titre
+  &-section-label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    margin-bottom: 18px;
+
+    color: $primary;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 3px;
+  }
+
+  &-section-line {
+    width: 60px;
+    height: 1px;
+    background: $primary;
+  }
+
+  // Titre principal
+  &-title {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0;
+
+    color: #fff;
+    font-size: clamp(42px, 4vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -2px;
+
+    span {
+      color: $primary;
+    }
+  }
+
+  &-title-line {
+    width: 60px;
+    height: 2px;
+    margin: 20px 0 25px;
+    background: $primary;
+  }
+
+  // Textes de présentation
+  &-description {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    p {
+      margin: 0;
+      color: $muted;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    &-lead {
+      color: $text;
+      font-size: 17px;
+    }
+  }
+
+  // Décoration à droite
+  &-decoration {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 220px;
+    height: 75%;
+
+    border-left: 1px solid rgba($primary, 0.12);
+    isolation: isolate;
+
+    // Nébuleuse violette
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -35px -25px -35px 0;
+
+      background-image: url('../../assets/background/background.webp');
+      background-size: cover;
+      background-position: right center;
+      background-repeat: no-repeat;
+
+      opacity: 0.22;
+
+      mask-image: radial-gradient(
+        ellipse at 75% 50%,
+        #000 5%,
+        transparent 75%
+      );
+
+      pointer-events: none;
+      z-index: -1;
+    }
+  }
+
+  // Mots-clés au centre de la décoration
+  &-decoration-words {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+
+    color: rgba(216, 180, 254, 0.65);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 4px;
+  }
+
+  // Grille des cartes
+  &-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+
+    flex: 0 0 auto;
+    padding: 25px 25px 0;
+  }
+
+  // Cartes
+  &-card {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 180px;
+    padding: 20px;
+    box-sizing: border-box;
+
+    border: 1px solid rgba($primary, 0.4);
+    border-radius: 12px;
+    background: rgba(10, 6, 20, 0.65);
+
+    transition:
+      border-color 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      border-color: rgba($primary, 0.8);
+      box-shadow: 0 8px 30px rgba($primary, 0.1);
+    }
+
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    &-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 48px;
+      height: 48px;
+
+      color: #d8b4fe;
+      background: rgba($primary, 0.08);
+      border: 1px solid rgba($primary, 0.5);
+      border-radius: 10px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0;
+      color: $muted;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    &-line {
+      width: 50px;
+      height: 2px;
+      margin-top: auto;
+      background: $primary;
+    }
+  }
+}
+
+// Écrans intermédiaires
+@media (max-width: 1100px) {
+  .about {
+    &-container {
+      padding: 20px 25px;
+    }
+
+    &-introduction {
+      gap: 25px;
+      padding: 20px 10px;
+    }
+
+    &-cards {
+      gap: 15px;
+      padding: 20px 10px 0;
+    }
+
+    &-card {
+      padding: 18px;
+    }
+  }
+}
+
+// Écrans peu hauts ou étroits
+@media (max-width: 900px), (max-height: 750px) {
+  .about {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+
+    &-container {
+      height: auto;
+      min-height: calc(100dvh - 40px);
+    }
+
+    &-introduction {
+      flex: initial;
+      min-height: 350px;
+    }
+  }
+}
+
+// Tablettes et smartphones
+@media (max-width: 700px) {
+  .about {
+    padding: 15px;
+
+    &-container {
+      min-height: calc(100dvh - 30px);
+      padding: 20px;
+    }
+
+    &-introduction {
+      display: block;
+      min-height: auto;
+      padding: 45px 0 30px;
+    }
+
+    &-section-label {
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    &-section-line {
+      width: 40px;
+    }
+
+    &-title {
+      font-size: 46px;
+    }
+
+    &-description {
+      p {
+        font-size: 14px;
+      }
+
+      &-lead {
+        font-size: 16px;
+      }
+    }
+
+    &-decoration {
+      display: none;
+    }
+
+    &-cards {
+      grid-template-columns: 1fr;
+      padding: 25px 0 0;
+    }
+
+    &-card {
+      min-height: 180px;
+    }
+  }
+}
+
+// Très petits écrans
+@media (max-width: 380px) {
+  .about {
+    padding: 10px;
+
+    &-container {
+      padding: 15px;
+    }
+
+    &-title {
+      font-size: 38px;
+    }
+
+    &-back {
+      font-size: 12px;
+    }
+  }
+}
+
+// Accessibilité
+@media (prefers-reduced-motion: reduce) {
+  .about-card,
+  .about-back,
+  .about-back-icon {
+    transition: none;
+  }
+}
