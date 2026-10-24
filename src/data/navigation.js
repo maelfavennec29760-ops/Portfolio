@@ -3,7 +3,7 @@ import { UserRound, Folder, Code2, Mail } from 'lucide-react'
 const navigation = [
     {
         title: "À PROPOS",
-        subtitle: "Mon parcours",
+        subtitle: "Qui suis-je ?",
         icon: UserRound,
         path: '/portfolio/about'
     },

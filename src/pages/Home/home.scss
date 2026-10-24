@@ -89,7 +89,6 @@ $muted: #a1a1b5;
     &:hover {
       border-color: $primary;
       box-shadow: 0 0 25px rgba($primary, 0.15);
-      transform: translateY(-4px);
     }
 
     &:focus-visible {

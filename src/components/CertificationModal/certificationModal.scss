@@ -1,0 +1,387 @@
+
+$primary: #a855f7;
+$background: #05030a;
+$card-background: #090713;
+$text: #f5f3ff;
+$muted: #a1a1b5;
+$light-purple: #c4b5fd;
+
+// Arrière-plan
+.certification-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  animation: certification-fade 0.2s ease-out;
+}
+
+// Fenêtre principale
+.certification-modal {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 700px;
+  max-height: 85dvh;
+
+  padding: 32px;
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  background: $background;
+  border: 1px solid rgba($primary, 0.7);
+  border-radius: 8px;
+
+  box-shadow:
+    0 0 50px rgba($primary, 0.12),
+    0 15px 60px rgba(0, 0, 0, 0.5);
+
+  color: $text;
+  font-family: 'JetBrains Mono', monospace;
+
+  animation: certification-appear 0.25s ease-out;
+
+  // En-tête
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  &-prefix {
+    color: $primary;
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  // Bouton de fermeture
+  &-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+
+    color: $muted;
+    background: transparent;
+    border: 1px solid rgba($primary, 0.25);
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition:
+      color 0.2s ease,
+      background 0.2s ease,
+      border-color 0.2s ease;
+
+    &:hover {
+      color: $text;
+      background: rgba($primary, 0.12);
+      border-color: $primary;
+    }
+  }
+
+  // Description
+  &-description {
+    margin: 18px 0 30px;
+
+    color: $muted;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  // Liste des certifications
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  // Carte de certification
+  &-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding: 24px;
+    box-sizing: border-box;
+
+    background: $card-background;
+    border: 1px solid rgba($primary, 0.3);
+    border-radius: 6px;
+
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+
+    &:hover {
+      border-color: rgba($primary, 0.6);
+      box-shadow: 0 0 20px rgba($primary, 0.06);
+    }
+  }
+
+  // Icône
+  &-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 60px;
+    height: 60px;
+
+    color: $primary;
+    background: rgba($primary, 0.08);
+    border: 1px solid rgba($primary, 0.25);
+    border-radius: 5px;
+  }
+
+  // Informations
+  &-details {
+    flex: 1;
+    min-width: 0;
+
+    h3 {
+      margin: 8px 0;
+
+      color: $text;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    p {
+      margin: 0;
+      color: $muted;
+      font-size: 11px;
+    }
+  }
+
+  &-issuer {
+    color: $primary;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  // Lien vers le PDF
+  &-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    flex-shrink: 0;
+
+    padding: 12px 16px;
+
+    color: $light-purple;
+    background: rgba($primary, 0.08);
+    border: 1px solid rgba($primary, 0.5);
+    border-radius: 4px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      background: rgba($primary, 0.17);
+      border-color: $primary;
+      box-shadow: 0 0 18px rgba($primary, 0.12);
+    }
+  }
+
+  // Focus clavier
+  &-close,
+  &-link {
+    &:focus-visible {
+      outline: 2px solid $primary;
+      outline-offset: 3px;
+    }
+  }
+
+  // Footer
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-top: 35px;
+    padding-top: 20px;
+
+    border-top: 1px solid rgba($primary, 0.2);
+
+    color: $muted;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+}
+
+// Animations
+@keyframes certification-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes certification-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Tablettes
+@media (max-width: 650px) {
+  .certification-overlay {
+    padding: 20px;
+  }
+
+  .certification-modal {
+    padding: 25px 20px;
+
+    &-heading h2 {
+      font-size: 19px;
+    }
+
+    &-card {
+      gap: 15px;
+      padding: 18px;
+    }
+
+    &-icon {
+      width: 50px;
+      height: 50px;
+    }
+
+    &-details h3 {
+      font-size: 13px;
+    }
+
+    &-link {
+      padding: 10px 12px;
+      font-size: 11px;
+    }
+  }
+}
+
+// Mobile
+@media (max-width: 480px) {
+  .certification-overlay {
+    padding: 15px;
+  }
+
+  .certification-modal {
+    padding: 22px 16px;
+
+    &-heading {
+      gap: 8px;
+
+      h2 {
+        font-size: 17px;
+      }
+    }
+
+    &-prefix {
+      font-size: 21px;
+    }
+
+    &-close {
+      width: 34px;
+      height: 34px;
+    }
+
+    &-description {
+      margin: 15px 0 25px;
+      font-size: 11px;
+    }
+
+    &-card {
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 16px;
+    }
+
+    &-icon {
+      width: 45px;
+      height: 45px;
+    }
+
+    &-details h3 {
+      font-size: 12px;
+    }
+
+    &-link {
+      width: 100%;
+      padding: 12px;
+    }
+
+    &-footer {
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+      font-size: 9px;
+    }
+  }
+}
+
+// Accessibilité
+@media (prefers-reduced-motion: reduce) {
+  .certification-overlay,
+  .certification-modal {
+    animation: none;
+  }
+
+  .certification-modal-card,
+  .certification-modal-close,
+  .certification-modal-link {
+    transition: none;
+  }
+}
