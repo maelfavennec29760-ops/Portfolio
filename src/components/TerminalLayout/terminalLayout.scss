@@ -1,0 +1,36 @@
+$primary: #a855f7;
+$background: #05030a;
+
+.terminal-layout {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 1200px;
+  height: 700px;
+  max-height: calc(100dvh - 40px);
+
+  background: $background;
+  border: 1px solid rgba($primary, 0.55);
+  border-radius: 8px;
+
+  box-shadow:
+    0 0 25px rgba($primary, 0.08),
+    inset 0 0 20px rgba($primary, 0.02);
+
+  overflow: hidden;
+
+  &-content {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .terminal-layout {
+    max-height: calc(100dvh - 20px);
+    height: calc(100dvh - 20px);
+    border-radius: 6px;
+  }
+}

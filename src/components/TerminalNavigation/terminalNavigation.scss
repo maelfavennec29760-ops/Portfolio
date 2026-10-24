@@ -1,0 +1,119 @@
+
+$primary: #a855f7;
+$text: #f5f3ff;
+$muted: #a1a1b5;
+$background: #090713;
+
+.terminal-navigation {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  width: 100%;
+  padding: 20px 25px;
+  box-sizing: border-box;
+
+  &-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-width: 0;
+    min-height: 45px;
+    padding: 10px;
+
+    background: $background;
+    border: 1px solid rgba($primary, 0.25);
+    border-radius: 4px;
+
+    color: $muted;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+
+    transition:
+      color 0.25s ease,
+      background 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+
+    svg {
+      flex-shrink: 0;
+      color: $primary;
+    }
+
+    &:hover {
+      color: $text;
+      background: rgba($primary, 0.06);
+      border-color: rgba($primary, 0.7);
+    }
+
+    &.active {
+      color: $text;
+      background: rgba($primary, 0.12);
+      border-color: $primary;
+      box-shadow: 0 0 15px rgba($primary, 0.12);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $primary;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// Tablette
+@media (max-width: 768px) {
+  .terminal-navigation {
+    gap: 8px;
+    padding: 15px;
+
+    &-link {
+      gap: 6px;
+      padding: 10px 5px;
+      font-size: 10px;
+    }
+  }
+}
+
+// Mobile
+@media (max-width: 600px) {
+  .terminal-navigation {
+    gap: 6px;
+    padding: 12px 10px;
+
+    &-link {
+      flex-direction: column;
+      gap: 6px;
+      min-height: 55px;
+      padding: 8px 4px;
+      font-size: 9px;
+
+      svg {
+        width: 17px;
+        height: 17px;
+      }
+    }
+  }
+}
+
+// Très petits écrans
+@media (max-width: 380px) {
+  .terminal-navigation {
+    gap: 4px;
+
+    &-link {
+      font-size: 8px;
+      letter-spacing: 0;
+    }
+  }
+}
+
+// Accessibilité
+@media (prefers-reduced-motion: reduce) {
+  .terminal-navigation-link {
+    transition: none;
+  }
+}

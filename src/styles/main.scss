@@ -22,3 +22,16 @@ input,
 textarea {
   font: inherit;
 }
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 20px;
+  box-sizing: border-box;
+
+  background: #05030a;
+}
